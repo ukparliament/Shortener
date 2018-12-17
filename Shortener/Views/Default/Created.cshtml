@@ -1,0 +1,19 @@
+﻿<div class="status--highlight theme--success">
+    <div class="input-group">
+        <label for="createdUrl">Short link created</label>
+        <input id="createdUrl" value="@Url.Link("GetById", new { id = ViewBag.Id })" readonly />
+        <button id="copyUrl" class="btn--primary--inverse">Copy</button>
+    </div>
+</div>
+<script>
+    (function () {
+        window.addEventListener("load", function () {
+            document.getElementById("createdUrl").select();
+
+            document.getElementById("copyUrl").addEventListener("click", function () {
+                document.getElementById("createdUrl").select();
+                document.execCommand("copy");
+            });
+        });
+    })();
+</script>

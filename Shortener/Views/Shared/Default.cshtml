@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "Layout";
+}
+
+<div class="section--primary">
+    <div class="container">
+        <h1>UK Parliament API</h1>
+    </div>
+</div>
+<section id="content">
+    <div class="container">
+        <div class="block">
+            @RenderBody()
+            <h2>Shorten a <em>parliament.uk</em> URL</h2>
+            <form method="post">
+          @*      @Html.AntiForgeryToken()*@
+                <div class="input-group">
+                    <label for="url">Paste or type a URL (link) here</label>
+                    <input id="url" name="url" required type="url" />
+                    <button class="btn--primary" type="submit">Shorten</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
