@@ -12,9 +12,9 @@
 <section id="content">
     <div class="container">
         <div class="block">
-            <h2>URL Stats</h2>
+            <h2>Urls ordered by request counts in the past 12 hours</h2>
             <table style="width:100%">
-                <tr><th>Url</th><th>Request Counts</th></tr>
+                <tr><th>Url</th><th>Request counts</th></tr>
                 @foreach (var result in Model)
                 {
                     <tr><td><a href="@result.Url" target="_blank">@result.Url</a></td> <td> @result.Counts</td></tr>
