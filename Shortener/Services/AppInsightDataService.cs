@@ -16,7 +16,7 @@ namespace Shortener
 
     public class AppInsightDataService : IAppInsightDataService
     {
-        private const string URL = "https://api.applicationinsights.io/v1/apps/{0}/{1}?query={2}";
+        private const string URL = "https://api.applicationinsights.io/v1/apps/{0}/{1}query={2}";
         private string applicationID;
         private string apiKey;
 
@@ -33,7 +33,8 @@ namespace Shortener
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("x-api-key", this.apiKey);
-            var req = string.Format(URL, this.applicationID, "query", query);
+            var timespan = "P30D";
+            var req = string.Format(URL, this.applicationID, $"query?timespan={timespan}&", query);
             HttpResponseMessage response = client.GetAsync(req).Result;
             if (response.IsSuccessStatusCode)
             {
