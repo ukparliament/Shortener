@@ -15,7 +15,7 @@ namespace Shortener
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json.Linq;
 
-    [Route("stats")]
+    [Route("s/stats")]
     public class StatsController : Controller
     {
         private readonly IAppInsightDataService dataService;

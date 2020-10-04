@@ -12,6 +12,7 @@ namespace Shortener
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Rewrite;
     using Microsoft.Extensions.DependencyInjection;
 
     public class Startup
@@ -30,6 +31,7 @@ namespace Shortener
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRewriter(new RewriteOptions().AddRedirect("^$", "s"));
             app.UseMvc();
         }
     }

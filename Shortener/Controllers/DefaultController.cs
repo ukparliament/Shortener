@@ -16,7 +16,7 @@ namespace Shortener
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("")]
+    [Route("s")]
     public class DefaultController : Controller
     {
         private readonly IStorageService storage;
