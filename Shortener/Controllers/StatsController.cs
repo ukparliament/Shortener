@@ -28,7 +28,7 @@ namespace Shortener
         [HttpGet]
         public IActionResult Get()
         {
-            string query = "requests | where url contains \"/s/\"  | where resultCode == 302 | summarize totalcount = sum(itemCount) by url | order by totalcount";
+            string query = "requests | where url contains \"api.parliament.uk/s/\"  | where resultCode == 302 | summarize totalcount = sum(itemCount) by url | order by totalcount";
             var json = this.dataService.Query(query);
             var root = JObject.Parse(json);
             IEnumerable<UrlRequestCounts> results = root["tables"][0]["rows"].ToObject<IEnumerable<string[]>>()
