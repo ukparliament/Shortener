@@ -13,13 +13,16 @@
             @RenderBody()
             <h2>Shorten a <em>parliament.uk</em> URL</h2>
             <form method="post">
-          @*      @Html.AntiForgeryToken()*@
+                @*      @Html.AntiForgeryToken()*@
                 <div class="input-group">
                     <label for="url">Paste or type a URL (link) here</label>
                     <input id="url" name="url" required type="url" />
                     <button class="btn--primary" type="submit">Shorten</button>
                 </div>
             </form>
+        </div>
+        <div class="block">
+            <h3><a href="/stats">Url request stats</a></h3>
         </div>
     </div>
 </section>

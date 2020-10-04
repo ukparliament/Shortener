@@ -10,27 +10,30 @@
 
 namespace Shortener
 {
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json.Linq;
 
-    public class Startup
+    [Route("stats")]
+    public class StatsController : Controller
     {
-        public void ConfigureServices(IServiceCollection services)
+        private readonly IAppInsightDataService dataService;
+
+        public StatsController(IAppInsightDataService dataService)
         {
-            services.AddSingleton<IStorageService, AzureTableStorageService>();
-            services.AddSingleton<IAppInsightDataService, AppInsightDataService>();
-            services.AddMvc();
+            this.dataService = dataService;
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        [HttpGet]
+        public IActionResult Get()
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMvc();
+            string query = "requests | where url contains \"/s/\"  | where resultCode == 302 | summarize totalcount = sum(itemCount) by url | order by totalcount";
+            var json = this.dataService.Query(query);
+            var root = JObject.Parse(json);
+            IEnumerable<UrlRequestCounts> results = root["tables"][0]["rows"].ToObject<IEnumerable<string[]>>()
+                .Select(row => new UrlRequestCounts() { Url = row[0], Counts = int.Parse(row[1]) });
+            return View(results);
         }
     }
 }

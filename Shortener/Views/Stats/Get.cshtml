@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "Layout";
+}
+
+@model IEnumerable<UrlRequestCounts>
+
+<div class="section--primary">
+    <div class="container">
+        <h1>UK Parliament API</h1>
+    </div>
+</div>
+<section id="content">
+    <div class="container">
+        <div class="block">
+            <h2>URL Stats</h2>
+            <table style="width:100%">
+                <tr><th>Url</th><th>Request Counts</th></tr>
+                @foreach (var result in Model)
+                {
+                    <tr><td><a href="@result.Url" target="_blank">@result.Url</a></td> <td> @result.Counts</td></tr>
+                }
+            </table>
+</div>
+    </div>
+</section>

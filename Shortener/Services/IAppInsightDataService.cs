@@ -10,27 +10,10 @@
 
 namespace Shortener
 {
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
+    using System.Threading.Tasks;
 
-    public class Startup
+    public interface IAppInsightDataService
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSingleton<IStorageService, AzureTableStorageService>();
-            services.AddSingleton<IAppInsightDataService, AppInsightDataService>();
-            services.AddMvc();
-        }
-
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMvc();
-        }
+        string Query(string query);
     }
 }
